@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 二叉树遍历
@@ -59,23 +57,76 @@ public class BinaryTreeTraversal {
 
     //--------------------------------迭代遍历--------------
 
+    // 前序遍历
     public void preOrderIterate(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            System.out.println(root);
+        while (!stack.isEmpty() || root != null) {
+
             while (root != null) {
                 System.out.println(root.value);
                 stack.push(root);
                 root = root.left;
             }
-            if (!stack.isEmpty()) {
 
+            if (!stack.isEmpty()) {
+                root = stack.pop();
+                root = root.right;
             }
         }
     }
 
-    public static void main(String[] args) {
+    // 中序遍历
+    public void inOrderIterate(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null) {
 
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            if (!stack.isEmpty()) {
+                root = stack.pop();
+                System.out.println(root.value);
+                root = root.right;
+            }
+        }
+    }
+
+    // 后序遍历
+    public void postOrderIterate(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        // 记录已访问的结点
+        Set<TreeNode> visited = new HashSet<>();
+        stack.add(root);
+        visited.add(root);
+        while (!stack.isEmpty()) {
+            root = getUnVisitedNode(stack.peek(), visited);
+            if (root == null) {
+                System.out.println(stack.pop().value);
+            } else {
+                stack.add(root);
+                visited.add(root);
+            }
+        }
+    }
+    private static TreeNode getUnVisitedNode(TreeNode node, Set<TreeNode> visited) {
+        if (node.left != null && !visited.contains(node.left)) {
+            return node.left;
+        } else if (node.right != null && !visited.contains(node.right))
+            return node.right;
+        else
+            return null;
+    }
+
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+        new BinaryTreeTraversal().preOrderIterate(root);
     }
 }
