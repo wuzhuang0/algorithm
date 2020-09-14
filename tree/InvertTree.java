@@ -15,9 +15,4 @@ public class InvertTree {
         root.right = left;
         return root;
     }
-
-    public TreeNode invertTree2(TreeNode root) {
-//        Queue
-        return null;
-    }
 }

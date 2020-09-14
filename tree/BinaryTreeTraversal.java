@@ -77,17 +77,17 @@ public class BinaryTreeTraversal {
 
     // 中序遍历
     public void inOrderIterate(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        while (!stack.isEmpty() || root != null) {
-
-            while (root != null) {
-                stack.push(root);
-                root = root.left;
+        Stack<TreeNode> stack=new Stack<>();
+        TreeNode node=root;
+        while (!stack.isEmpty() || node!=null){
+            while (node != null){
+                stack.add(node);
+                node=node.left;
             }
-            if (!stack.isEmpty()) {
-                root = stack.pop();
-                System.out.println(root.value);
-                root = root.right;
+            if (!stack.isEmpty()){
+                node= stack.pop();
+                System.out.println(node.value);
+                node=node.right;
             }
         }
     }
@@ -112,12 +112,15 @@ public class BinaryTreeTraversal {
     private static TreeNode getUnVisitedNode(TreeNode node, Set<TreeNode> visited) {
         if (node.left != null && !visited.contains(node.left)) {
             return node.left;
-        } else if (node.right != null && !visited.contains(node.right))
+        } else if (node.right != null && !visited.contains(node.right)) {
             return node.right;
-        else
+        }
+        else {
             return null;
+        }
     }
 
+    //-------------------------- morris算法 -----------------------------
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
@@ -127,6 +130,6 @@ public class BinaryTreeTraversal {
         root.left.right = new TreeNode(5);
         root.right.left = new TreeNode(6);
         root.right.right = new TreeNode(7);
-        new BinaryTreeTraversal().preOrderIterate(root);
+        new BinaryTreeTraversal().inOrderIterate(root);
     }
 }
