@@ -1,5 +1,5 @@
 /**
- * 平衡二叉树
+ * 判断是否为平衡二叉树   树高度差小于等于1
  */
 public class AVLTree {
 
@@ -12,7 +12,7 @@ public class AVLTree {
         }
     }
 
-     private int height(TreeNode root) {
+    private int height(TreeNode root) {
         if (root == null) {
             return 0;
         } else {

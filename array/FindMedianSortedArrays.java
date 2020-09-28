@@ -8,6 +8,7 @@ public class FindMedianSortedArrays {
             int n = nums2.length;
             //处理任何一个nums为空数组的情况
             if (m == 0) {
+                // 奇数
                 if (n % 2 != 0) {
                     return nums2[n / 2];
                 }
@@ -19,6 +20,7 @@ public class FindMedianSortedArrays {
                 }
                 return (nums1[m / 2] + nums1[m / 2 - 1]) / 2.0;
             }
+
             int total = m + n;
             //总数为奇数，找第 total / 2 + 1 个数
             if (total % 2 != 0) {
